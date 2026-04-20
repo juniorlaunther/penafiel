@@ -77,13 +77,16 @@ export default function App() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header Animation
-      gsap.from(headerRef.current, {
-        y: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      });
+      // Header Animation - Failsafe and cleaning props
+      if (headerRef.current) {
+        gsap.from(headerRef.current, {
+          y: -100,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+          clearProps: "all"
+        });
+      }
 
       // Hero Animations
       const heroTl = gsap.timeline();
@@ -144,7 +147,7 @@ export default function App() {
       {/* HEADER */}
       <header 
         ref={headerRef}
-        className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-bottom border-stone-100 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-stone-100 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center">
